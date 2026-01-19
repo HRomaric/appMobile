@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,12 +25,17 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     protected Intent intent;
     private ActivityResultLauncher<Intent>launcher;
+    private ImageView iv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -36,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         findViewById(R.id.button2).setOnClickListener(this);
         findViewById(R.id.button3).setOnClickListener(this);
+
+        iv = findViewById(R.id.imageview_main);
 
         intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -51,9 +60,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Bitmap image = (Bitmap) extras.get("data");
                             int largeur = image.getWidth();
                             int hauteur = image.getHeight();
-                            String msg = "Dim img : " + largeur + " " + hauteur;
+                            String msg = "Dimension de l'image : " + hauteur + "x" + largeur;
                             Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                             Log.i("PHOTO", msg);
+
+                            iv.setImageBitmap(image);
+                        }
+                        else if (resCode == 2) {
+                            String dateRecue = result.getData().getStringExtra("date_retour");
+                            Toast.makeText(MainActivity.this, "Date : " + dateRecue, Toast.LENGTH_LONG).show();
                         }
                         else {
                             Log.i("PHOTO", "ERROR");
@@ -62,6 +77,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
         );
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_langue, menu);
+        return true;
+    }
+
 
     public void onBonjour(View view){
         String msg = "HELLO THERE !";
@@ -74,14 +97,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v.getId() == R.id.button2) {
             String txt = "Hello world !";
-            Snackbar sb = Snackbar.make(this.findViewById(android.R.id.content), txt, 10000);
+            int val = 42;
+            /*Snackbar sb = Snackbar.make(this.findViewById(android.R.id.content), txt, 10000);
             sb.show();
             sb.setAction("OK", new View.OnClickListener() {
                @Override
                public void onClick(View view){
                    Log.i("SNACKBAR", "OK");
                }
-            });
+            });*/
+            Intent i = new Intent(this, Page2.class);
+            i.putExtra("info", txt);
+            i.putExtra("val", val);
+            launcher.launch(i);
         }
         if (v.getId() == R.id.button3){
             launcher.launch(intent);
