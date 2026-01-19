@@ -141,8 +141,8 @@ public class Page2 extends BaseActivity {
                 String clouds = current.getInt("cloud_cover") + " " + units.getString("cloud_cover");
                 String wind = current.getDouble("wind_speed_10m") + " " + units.getString("wind_speed_10m");
 
-                String finalResult = "Temp : " + temp + "\nPluie : " + rain +
-                        "\nNuages : " + clouds + "\nVent : " + wind;
+                String finalResult = "Temp : " + temp + "\n"+getString(R.string.rain)  +" : " + rain +
+                        "\n"+getString(R.string.cloud)+" : " + clouds + "\n"+getString(R.string.wind)+" : " + wind;
 
                 // 4. Mettre à jour l'interface (sur le thread principal)
                 runOnUiThread(() -> {

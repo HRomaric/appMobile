@@ -15,7 +15,7 @@
         android:layout_marginTop="170dp"
         android:layout_marginEnd="217dp"
         android:layout_marginBottom="542dp"
-        android:text="TextView"
+        android:text="@string/helloPage2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -27,21 +27,21 @@
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="264dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="49dp"
         android:onClick="rerourPage2"
-        android:text="retour"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_page2" />
+        android:text="@string/retour_en_arriere"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/bt_localisation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="280dp"
+        android:layout_marginEnd="224dp"
+        android:layout_marginBottom="48dp"
         android:onClick="locate"
-        android:text="Locate"
+        android:text="@string/btLocate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -49,9 +49,9 @@
         android:id="@+id/tv_localisatioin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginBottom="238dp"
-        android:text="TextView"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="356dp"
+        android:text="@string/Localisation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -59,9 +59,9 @@
         android:id="@+id/tv_meteo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginBottom="94dp"
-        android:text="TextView"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="232dp"
+        android:text="@string/meteo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -6,10 +6,13 @@
     <string name="text_arrive">Bonjour monde</string>
     <string name="dimension">Dimensions de l\'image</string>
     <string name="popUpHello">Bonjour à vous</string>
-    <string name="retour">retour</string>
+    <string name="retour_en_arriere">retour</string>
     <string name="helloPage2">Bonjour de la page 2</string>
     <string name="Localisation">Votre localisation est actuellement indisponible</string>
     <string name="btLocate">Localisez vous</string>
     <string name="meteo">La météo est actuellement indisponible</string>
     <string name="lang">Français</string>
+    <string name="rain">Pluie</string>
+    <string name="cloud">Nuages</string>
+    <string name="wind">Vent</string>
 </resources>

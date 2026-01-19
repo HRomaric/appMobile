@@ -7,10 +7,13 @@
     <string name="text_arrive">Hello world</string>
     <string name="dimension">Dimmension of the image </string>
     <string name="popUpHello">Hello there</string>
-    <string name="retour">back</string>
+    <string name="retour_en_arriere">back</string>
     <string name="helloPage2">Hello from the page 2</string>
-    <string name="Localisation">Your locate is currently unavailable</string>
-    <string name="btLocate">Localisez vous</string>
+    <string name="Localisation">Your location is currently unavailable</string>
+    <string name="btLocate">Locate you</string>
     <string name="meteo">The weather forcasting is currently unavailable</string>
     <string name="lang">English</string>
+    <string name="rain">Rain</string>
+    <string name="cloud">Cloud</string>
+    <string name="wind">Wind</string>
 </resources>
