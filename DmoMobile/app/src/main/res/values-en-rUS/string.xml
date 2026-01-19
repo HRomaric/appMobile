@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MobileDemo</string>
+    <string name="bt1">Hello</string>
+    <string name="bt2">Page 2</string>
+    <string name="bt3">Photo</string>
+    <string name="text_arrive">Hello world</string>
+    <string name="dimension">Dimmension of the image </string>
+    <string name="popUpHello">Hello there</string>
+    <string name="retour">back</string>
+    <string name="helloPage2">Hello from the page 2</string>
+    <string name="Localisation">Your locate is currently unavailable</string>
+    <string name="btLocate">Localisez vous</string>
+    <string name="meteo">The weather forcasting is currently unavailable</string>
+    <string name="lang">English</string>
+</resources>

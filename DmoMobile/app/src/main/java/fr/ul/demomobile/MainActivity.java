@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,13 +17,15 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
+import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected Intent intent;
     private ActivityResultLauncher<Intent>launcher;
     private ImageView iv;
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Bitmap image = (Bitmap) extras.get("data");
                             int largeur = image.getWidth();
                             int hauteur = image.getHeight();
-                            String msg = "Dimension de l'image : " + hauteur + "x" + largeur;
+                            String msg = getString(R.string.dimension) + hauteur + "x" + largeur;
                             Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                             Log.i("PHOTO", msg);
 
@@ -79,15 +82,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_langue, menu);
-        return true;
-    }
-
-
     public void onBonjour(View view){
-        String msg = "HELLO THERE !";
+        String msg = getString(R.string.popUpHello);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         Log.i("Bonjour", msg);
     }
@@ -96,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button2) {
-            String txt = "Hello world !";
+            String txt = getString(R.string.text_arrive);
             int val = 42;
             /*Snackbar sb = Snackbar.make(this.findViewById(android.R.id.content), txt, 10000);
             sb.show();

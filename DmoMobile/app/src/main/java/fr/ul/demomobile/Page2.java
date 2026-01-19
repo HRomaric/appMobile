@@ -8,14 +8,17 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
+import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
@@ -33,7 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Page2 extends AppCompatActivity {
+public class Page2 extends BaseActivity {
     private TextView tv;
     private TextView tv2;
     private FusedLocationProviderClient clientPosition;
@@ -47,6 +50,10 @@ public class Page2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_page2);
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -67,11 +74,6 @@ public class Page2 extends AppCompatActivity {
         clientPosition = LocationServices.getFusedLocationProviderClient(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_langue, menu);
-        return true;
-    }
 
 
     public void rerourPage2(View view){
@@ -104,7 +106,7 @@ public class Page2 extends AppCompatActivity {
 
                 } else {
                     // Localisation non disponible
-                    tv2.setText("Localisation non disponible");
+                    tv2.setText(getString(R.string.meteo));
                 }
             }
         });
@@ -153,4 +155,5 @@ public class Page2 extends AppCompatActivity {
             }
         }).start();
     }
+
 }
