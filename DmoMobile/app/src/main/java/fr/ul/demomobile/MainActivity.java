@@ -36,6 +36,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        //ajout du menu
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,11 +45,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //ajour action pour les boutons
         findViewById(R.id.button2).setOnClickListener(this);
         findViewById(R.id.button3).setOnClickListener(this);
 
+        //Image de la photo
         iv = findViewById(R.id.imageview_main);
 
+        //activité photo
         intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         launcher = registerForActivityResult(
@@ -82,6 +87,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
+    //fct onclick de on Bonjour, bt bonjour
     public void onBonjour(View view){
         String msg = getString(R.string.popUpHello);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
@@ -89,9 +95,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
+
+    //fct onclick des autres bt
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.button2) {
+        if (v.getId() == R.id.button2) { // Encvoie d'un message à la deuxième activité
             String txt = getString(R.string.text_arrive);
             int val = 42;
             /*Snackbar sb = Snackbar.make(this.findViewById(android.R.id.content), txt, 10000);
@@ -107,7 +115,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             i.putExtra("val", val);
             launcher.launch(i);
         }
-        if (v.getId() == R.id.button3){
+        if (v.getId() == R.id.button3){// On lance l'appareil photo
             launcher.launch(intent);
         }
     }

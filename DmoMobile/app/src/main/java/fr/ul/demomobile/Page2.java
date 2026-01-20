@@ -51,6 +51,7 @@ public class Page2 extends BaseActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_page2);
 
+        //Ajout du menu
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
 
@@ -60,10 +61,12 @@ public class Page2 extends BaseActivity {
             return insets;
         });
 
+        //Zone de texte
         tv = findViewById(R.id.tv_page2);
         tv2 = findViewById(R.id.tv_localisatioin);
         tv3 = findViewById(R.id.tv_meteo);
 
+        //affichage des infos reçus de l'actv principale
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String info = extras.getString("info");
@@ -71,11 +74,13 @@ public class Page2 extends BaseActivity {
             tv.setText(info + " " + val);
         }
 
+        //initiliasation de la localisation
         clientPosition = LocationServices.getFusedLocationProviderClient(this);
     }
 
 
 
+    //fct qui permet de retourner à l'activité principale
     public void rerourPage2(View view){
         Intent resultIntent = new Intent();
         Date dateCourante = Calendar.getInstance().getTime();
@@ -85,13 +90,16 @@ public class Page2 extends BaseActivity {
         finish();
     }
 
+
+    //fct d'action au bouton localisation
     public void locate(View view){
+        //demande des droits
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }
 
-        // Demander la position actuelle
+        //get la position
         clientPosition.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null).addOnSuccessListener(this, new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location loc) {
@@ -102,10 +110,10 @@ public class Page2 extends BaseActivity {
                     lat = loc.getLatitude();
                     lon = loc.getLongitude();
 
+                    //affichage de la météo
                     printMeteo();
 
                 } else {
-                    // Localisation non disponible
                     tv2.setText(getString(R.string.meteo));
                 }
             }
@@ -117,25 +125,22 @@ public class Page2 extends BaseActivity {
         String urlString = "https://api.open-meteo.com/v1/forecast?latitude=" + lat +
                 "&longitude=" + lon +
                 "&current=temperature_2m,precipitation_probability,cloud_cover,wind_speed_10m,wind_direction_10m";
-        // On lance le réseau dans un nouveau thread
+
+        //mise en thread pour pas surchargé l'appli
         new Thread(() -> {
             try {
-                // 1. Ouvrir la connexion
                 URL url = new URL(urlString);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
-                // 2. Récupérer l'InputStream et le transformer en String
                 InputStream inputStream = connection.getInputStream();
                 Scanner scanner = new Scanner(inputStream).useDelimiter("\\A");
                 String response = scanner.hasNext() ? scanner.next() : "";
 
-                // 3. Analyser le JSON
                 JSONObject jsonResponse = new JSONObject(response);
                 JSONObject current = jsonResponse.getJSONObject("current");
                 JSONObject units = jsonResponse.getJSONObject("current_units");
 
-                // Extraction des données et des unités
                 String temp = current.getDouble("temperature_2m") + " " + units.getString("temperature_2m");
                 String rain = current.getInt("precipitation_probability") + " " + units.getString("precipitation_probability");
                 String clouds = current.getInt("cloud_cover") + " " + units.getString("cloud_cover");
@@ -144,9 +149,9 @@ public class Page2 extends BaseActivity {
                 String finalResult = "Temp : " + temp + "\n"+getString(R.string.rain)  +" : " + rain +
                         "\n"+getString(R.string.cloud)+" : " + clouds + "\n"+getString(R.string.wind)+" : " + wind;
 
-                // 4. Mettre à jour l'interface (sur le thread principal)
+                //Affiche et met fin au thread
                 runOnUiThread(() -> {
-                    tv3.setText(finalResult); // txtPos est ton TextView
+                    tv3.setText(finalResult);
                 });
 
             } catch (Exception e) {
